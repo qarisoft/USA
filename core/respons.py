@@ -102,6 +102,9 @@ class BaseRespons(Downloads, Filters):
         'filter':   c.filter,
         'page':     c.page,
         'pagination_count': c.pagination_count,
+        'variable'        :c.variable,
+        
+        
     }
     paginator = Paginator(stocks, per_page=int(c.pagination_count))   
     
@@ -170,7 +173,9 @@ class HistoryRespons(BaseRespons):
         'filter':   c.filter,
         'page':     c.page,
         'page2':     c.page2,
+        'variable':c.variable,
         'pagination_count': c.pagination_count,
+        'pagination_count2': c.pagination_count2,
     }
     @classmethod
     def set_data(cls,name):
@@ -199,6 +204,7 @@ class HistoryRespons(BaseRespons):
             self.db.dates.index.to_list(),per_page=int(self.c.pagination_count2))
         self._headers:list = self.paginator2.page(int(self.c.page2)).object_list
         self._headers.insert(0,'Company')
+        
     
     @classmethod
     def get_data(self,var=False,name=False,page=False):
@@ -329,7 +335,7 @@ class FinanceRespons(BaseRespons):
         cls.headers         = list(
             cls.db.dates.index)
         cls.db.variables    = db.Vars.variables
-        cls.variables    = db.Vars.variables
+        cls.variables       = db.Vars.variables
         stocks_data         = db.stocks.index
         if cls.c.filter :
             stocks_data     = Filters.get_stocks_by_filter(cls.c.filter)

@@ -41,10 +41,12 @@ class Respons(BaseRespons):
     
     @classmethod
     def manager(cls,request,name,template):
+        
         cls.respons_cls = cls.router(name,request)
         if not isinstance(cls.respons_cls,BaseRespons):
             raise ValueError("class not base respons")
         
+        cls.update_state(request)
         cls.respons_cls.update_state(request)
         target = cls.check(request)
         if target:

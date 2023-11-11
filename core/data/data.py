@@ -2,7 +2,8 @@ import os
 import pathlib
 import pandas as pd
 from joblib import Memory
-
+import warnings
+warnings.filterwarnings("ignore")
 if True:
     _db_path = 'dataBase'
     _income_path  = f'{_db_path}/income.csv'
@@ -176,12 +177,9 @@ class History:
         self.dates  = getattr(Db,
                               f'_{self.name}_dates').sort_index(
                                   ascending=False)
-        # print(0000000000000000000,self.dates)
-        # self.dates = self.dates[~self.dates.index.isin(self.forbiden)]
         self.stocks = [i[:-4]
                        for i in  os.listdir(self.DIR)
                        if i.endswith('.csv')]
-        # self.headers = self.dates.index.to_list()[300:]
         
 
     vars = [
@@ -189,9 +187,6 @@ class History:
                 variables
             )
         ]
-    # def vars(self):
-        
-        # return 
 
     def _get_stock_data(self, stock):
         if stock not in self.data.keys():
@@ -202,7 +197,10 @@ class History:
                 df = df.sort_index(ascending=False)
                 # df = df.dropna(how)
             except:
-                df = self.data[0]
+                # df = 
+                columns = list(self.data.values())[0].columns
+                df = pd.DataFrame(columns=columns)
+                df.set_index(['Date'])
             self.data[stock]=df
                 
         df = self.data[stock]
