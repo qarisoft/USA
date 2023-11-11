@@ -31,15 +31,15 @@ function installpip {
         .env/Scripts/pip --version
     }
     catch {
-        .env/Scripts/python -m pip install --upgrade pip
+        python -m pip install --upgrade pip
     }
 }
 
 function mak_env {
     installpip
-    .env/Scripts/pip install --upgrade pip
-    .env/Scripts/pip install virtualenv
-    .env/Scripts/python -m venv .env
+    pip install --upgrade pip
+    pip install virtualenv
+    python -m venv .env
     
     install_pakgs
 }
