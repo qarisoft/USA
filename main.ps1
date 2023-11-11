@@ -13,12 +13,14 @@ function install_pakgs {
     $envlist = .env/Scripts/python.exe -m pip freeze
     $envlist_n = @()
     for ($i = 0; $i -lt $envlist.Count; $i++) {
-        $pkg = $envlist[$i] -split "=="
-        $pkgName = $pkg[0]
+        $pkg = $envlist[$i] 
+        # -split "=="
+        $pkgName = $pkg
         $envlist_n += $pkgName
     }
     for ($i = 0; $i -lt $reqs.Count; $i++) {
         $packg = $reqs[$i]
+        # $packg
         if ($packg -in $envlist_n) {
         }
         else {
