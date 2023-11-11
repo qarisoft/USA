@@ -5,23 +5,22 @@
                 {% for fltr in filters %}
                 <div class="col ms-1">
                     
-                    <div class="row justify-content-start   ">
-                            
-                            {{ fltr.sec_name }}
-                        </div>
-                            <form class="row " method="get" style="display: inline;">
 
-                                <select  class="" name="filter" id="" onchange="this.form.submit()">
-                                    
-                                    {% for fl in fltr.filter_list %}
-                                    <option  value="{{ fl }}">
-                                        {{ fl }}
-                                    </option>
-                                    {% endfor %}
-                                </select>
-                            </form>
-                            </div>
-                    {% endfor %}
+                    <form class="row " method="get" style="display: inline;">
+
+                        <select  class="" name="filter" id="" onchange="this.form.submit()">
+                            <option value="">
+                                {{ fltr.sec_name }}
+                            </option>
+                            {% for fl in fltr.filter_list %}
+                            <option  value="{{ fl }}">
+                                {{ fl }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                    </div>
+                {% endfor %}
                     
                 </div>
             </div>
