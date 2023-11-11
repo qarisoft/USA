@@ -22,27 +22,24 @@ function install_pakgs {
         }
         else {
             "installing " + $packg
-            pip install $packg
+            .env/Scripts/pip install $packg
         }
     }   "all dependancies are good"
 }
 function installpip {
     try {
-        
-        pip --version
+        .env/Scripts/pip --version
     }
     catch {
-        python -m pip install --upgrade pip
-        # <#Do this if a terminating exception happens#>
+        .env/Scripts/python -m pip install --upgrade pip
     }
-    
 }
 
 function mak_env {
     installpip
-    pip install --upgrade pip
-    pip install virtualenv
-    python -m venv .env
+    .env/Scripts/pip install --upgrade pip
+    .env/Scripts/pip install virtualenv
+    .env/Scripts/python -m venv .env
     
     install_pakgs
 }
@@ -65,6 +62,8 @@ function main_run {
         catch {
             Write-Output "no env yet"
             mak_env
+            install_pakgs
+            download_data
             run
         }
     }
