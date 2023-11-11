@@ -1,0 +1,19 @@
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <!-- <th>Companies</th> -->
+            {% if headers %}
+            {% for h in headers %}
+            <th>{{h}}</th>
+            {% endfor %}
+            {% endif %}
+
+        </tr>
+    </thead>
+
+
+    <tfoot>
+        <tr>
+        </tr>
+    </tfoot>
+</table>

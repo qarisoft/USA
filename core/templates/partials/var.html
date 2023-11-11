@@ -1,0 +1,11 @@
+<form action="" style="max-width: fit-content">
+    <label for="cars"><h3 style="margin-right: 10px;">variables</h3></label>
+    <select id="cars" name="variable" onchange="this.form.submit()">
+        {% for a in vars %}
+
+            <option type="submit" value="{{a.number}}" {% if variable == a.number %}
+                selected="selected" {% endif %}>{{a.number}}- {{a.spaced}}
+            </option>
+        {% endfor %}
+    </select>
+</form>

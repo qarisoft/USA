@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand {% if name == 'home' %} active {% endif %}" href="{% url 'index'  %}">Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" 
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% if name == 'income' %} active {% endif %}"  href="{% url 'finance' 'income' %}?variable=0">income</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if name == 'cash' %} active {% endif %}" href="{% url 'finance' 'cash' %}?variable=0">cash</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if name == 'balance' %} active {% endif %}" href="{% url 'finance' 'balance' %}?variable=0">balance</a>
+          </li>
+
+          {% if history %}
+          <li>
+            <a class="nav-link {% if name == '1d' %} active {% endif %}" href="{% url 'history' '1d' %}">daily</a>
+          </li>
+          <li>
+            <a class="nav-link {% if name == '1wk' %} active {% endif %}" href="{% url 'history' '1wk' %}">weak</a>
+          </li>
+          <li>
+            <a class="nav-link {% if name == '1mo' %} active {% endif %}" href="{% url 'history' '1mo' %}">month</a>
+          </li>
+
+          {% else %}
+          <li>
+            <a class="nav-link {% if name == '1mo' %} active {% endif %}" href="{% url 'history' '1d' %}">History</a>
+          </li>
+          {% endif %}
+          <li>
+            <a class="nav-link {% if name == 'filter' %} active {% endif %}" href="{% url 'filter'  %}">filters</a>
+          </li>
+        </ul>
+        <span class="">
+          {% if page %}
+          <form action="" style="display: inline;  ">
+                                    {% if filter %} 
+                                    <label for="
+                                    ">
+                                    <a class="btn btn-danger px-2 py-0"   href="?filter=false">x </a>
+                                    {{filter}} 
+                                    {% endif %}
+                                  </label>
+              
+              {% if stock_count %}
+              <label class="mx-3"> {{ stock_count }} stock,</label>
+              {% endif %}
+              {% if page2 %}
+
+              <label for="page2">dates Page</label>
+              <select name="page2" id="page2" onchange="this.form.submit()">
+                <option value="{{ page2 }}" selected="selected"  >{{ page2 }}</option>
+                {% for p2 in paginator2 %}
+                <option value="{{ p2.number }}" {% if p2.number == page2 %} selected="selected" {% endif %} >{{ p2.number }}</option>
+                {% endfor  %}
+              </select>
+              {% endif  %}
+
+              <label for="page">Page</label>
+
+              <select name="page" id="page" onchange="this.form.submit()">
+                <option value="{{ page }}" selected="selected"  >{{ page }}</option>
+                {% for p in paginator %}
+                <option value="{{ p.number }}" {% if p.number == page %} selected="selected" {% endif %} >{{ p.number }}</option>
+                {% endfor  %}
+              </select>
+
+              <!-- <button type="submit" class="btn " style="padding: 2px"><i class="fa-solid fa-check"></i></button> -->
+              <label for="pagination_count">Count</label>
+              <input type="number" style=" width: fit-content; max-width: 70px" value="{{pagination_count}}" name="pagination_count">
+            </form>
+            <form action="" method="get" style="display: inline;">
+
+              <button type="submit" class="btn" name="download" value="{{variable}}" style="padding: 2px">
+                <i class="fa-solid fa-download" style="color: #30a210;font-size:larger;"></i>
+              </button>
+              <!-- <a href="http://"  class="btn sa-download">d</a> -->
+              {% if name != 'profile' %}
+              <button type="button" class="btn sa-download" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-cart-arrow-down"></i>
+              </button>
+              {% endif %}
+            </form>
+            {% endif %}
+        </span>
+      </div>
+
+    </div>
+</nav>
+{% include 'partials/modal.html' %}
+<style>
+  .nav-link.active,
+  .navbar-brand.active{
+    font-weight: bolder;
+  }
+</style>

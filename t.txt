@@ -1,0 +1,9 @@
+Django
+numpy
+openpyxl
+pandas
+requests
+xlsxwriter
+tqdm
+gdown
+joblib

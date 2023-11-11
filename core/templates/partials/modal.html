@@ -1,0 +1,32 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1 " aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content " style="width: 112%;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Download list</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="GET" action>
+                    {% for ch in vars %}
+                    <div class="input-group-prepend ">
+                        <div class="input-group-text ">
+                            <input type="checkbox" id="{{ch.spaced}}" name="download_list" value="{{ch.number}}"
+                                aria-label="Checkbox for following text input ">
+                            <label for="{{ch.spaced}}" style="padding-left: 10px; ">
+                                {{ch.spaced}}
+                            </label>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary " value="Submit">download </button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>

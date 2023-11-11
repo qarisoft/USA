@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %} index{% endblock title %}
+{% block body %}
+
+<div class="container">
+    
+    {% include 'table.html' %}
+
+</div>
+
+{% endblock body %}
+{% block js %}
+<script src="{% static 'js/profile.js' %}" >    </script>
+{% endblock js %}

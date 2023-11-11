@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %} index{% endblock title %}
+{% block body %}
+
+<div class="container">
+    <h2>delet filter {{filter}}</h2>
+    <h3>are you sure</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="delet_filter_sure_yes" value="{{filter}}">
+        <button type="submit" class="btn btn-primary">Yes Sure</button>
+    </form>
+</div>
+
+{% endblock body %}
+{% block js %}
+<script src="{% static 'js/filter.js' %}"></script>
+
+{% endblock js %}

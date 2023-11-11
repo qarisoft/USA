@@ -1,0 +1,145 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %} index{% endblock title %}
+{% block body %}
+
+<style>
+    .container-myC,
+.dropp {
+    display: none;
+}
+
+.drop {
+    display: flex;
+}
+
+.filtr-sec {
+    height: 100%;
+    overflow: scroll;
+    display: none;
+}
+
+.filtr-sec-name {
+    position: absolute;
+    /* background-color: white; */
+}
+
+.stks-count {
+    display: inline-block;
+}
+
+.tooltiptext {
+    /* background-color: antiquewhite; */
+    color: inherit;
+    /* display: none; */
+    visibility: hidden;
+}
+
+.tooltiptext {
+    height: 150px;
+    overflow-y: auto;
+    width: 160;
+    position: absolute;
+    top: 95px;
+}
+
+</style>
+<div class="container">
+    <h3>
+        filter dashboard
+    </h3>
+
+    <hr>
+    <button style="position: relative;left: 85%;" id="create-f-btn" class="create-filtr btn btn-primary">create
+    </button> 
+
+    <div id="container-myC" class="container-myC">
+        <div class="form-group d-flex">
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <input type="hidden" value="add" name="add_filtr">
+                <label for="new_filtr">filter name </label>
+                <input type="text" name="new_filtr" id="" required>
+                <!-- <input type="checkbox" name="cros" value="cros" id="crosss"> -->
+                <label for="new_filtr">cros over</label>
+                <select name="crostype" id="crosss">
+                    <option value="all">all</option>
+                    <option value="inner">iner join</option>
+                    <option value="outer">outer join</option>
+                </select>
+                <button type="button" id="dropdown" class="dropdown btn btn-primary">></button>
+                <input style="margin-left: 40px;" type="submit" value="submit">
+                <h4 id="stks-count" class="stks-count pt-4 ms-4 ">companies 0</h4>
+                <ul class="tooltiptext"></ul>
+                <hr>
+                <div class="row " id="input-group-prepend">
+                    {% for fl in filter_sections %}
+
+                    <div class="col filtr-sec ">
+                        <h3 class="filtr-sec-name">{{fl.sec_name}}</h3>
+                        <div style="height: 300px; margin-top: 41px;" class="">
+                            {% for f in fl.filter_list %}
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" class="filter-chkbox" id="{{f}}" name="filtr_list" 
+                                    value="{{f}}" aria-label="Checkbox for following text input">
+                                    <label for="{{f}}" style="padding-left: 10px;">
+                                        {{f}}
+                                    </label>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <table style="max-width: 70%; margin-left:30px;" class="table" id="example">
+        <thead>
+            <tr>
+                {% for stk in heads %}
+
+                <th scope="col">{{stk}}</th>
+                {% endfor %}
+
+            </tr>
+        </thead>
+        <tbody>
+
+
+            {% for stk in filters %}
+            <tr>
+                <td> {{stk.sec_name}}</td>
+                <!-- <td>{{stk.name}}</td> -->
+                <td>{{stk.length}}</td>
+                <td>
+                    <!-- <form method="POST"> -->
+                        <!-- <div class="del-span">-
+
+                    </div> -->
+                        <!-- <input type="hidden" value="remove_filter" name="remove_filter"> -->
+                        <!-- <input type="hidden" value="{{stk.sec_name}}" name="filtr_name"> -->
+                        <a href="{% url 'delet_filter' stk.sec_name %}"  style="font-size: small; " class="btn btn-danger">delet</a>
+
+                            <!-- <label class="sure" id="sure{{stk.n}}" for=""> are you sure</label> -->
+                    <!-- </form> -->
+
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+</div>
+<!-- <script src="{% static 'static/js/jquery-3.7.0.js' %}"></script> -->
+{% endblock body %}
+{% block js %}
+<script src="{% static 'js/filter.js' %}"></script>
+
+{% endblock js %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %} index{% endblock title %}
+{% block body %}
+
+<div class="container">
+    
+    {% include 'partials/var.html' %}
+    {% include 'table.html' %}
+
+</div>
+
+{% endblock body %}
+{% block js %}
+
+<script src="{% static 'js/finance.js' %}" >    </script>
+
+{% endblock js %}
