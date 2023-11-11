@@ -8,6 +8,7 @@ function download_data {
 }
 function install_pakgs {
     .env/Scripts/activate
+    .env/Scripts/python -m pip install --upgrade pip
     $reqs = Get-Content('t.txt')
     $envlist = .env/Scripts/python.exe -m pip freeze
     $envlist_n = @()
